@@ -1,0 +1,216 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%     Declarations (skip to Begin Document, line 88, for parts you fill in)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt]{article}
+
+\usepackage{geometry}  % Lots of layout options.  See http://en.wikibooks.org/wiki/LaTeX/Page_Layout
+\geometry{letterpaper}  % ... or a4paper or a5paper or ... 
+\usepackage{fullpage}  % somewhat standardized smaller margins (around an inch)
+\usepackage{setspace}  % control line spacing in latex documents
+\usepackage[parfill]{parskip}  % Activate to begin paragraphs with an empty line rather than an indent
+
+\usepackage{amsmath,amssymb}  % latex math
+\usepackage{empheq} % http://www.ctan.org/pkg/empheq
+\usepackage{bm,upgreek}  % allows you to write bold greek letters (upper & lower case)
+
+% for typsetting algorithm pseudocode see http://en.wikibooks.org/wiki/LaTeX/Algorithms_and_Pseudocode
+\usepackage{algorithmic,algorithm}  
+
+\usepackage{graphicx}  % inclusion of graphics; see: http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics
+% allow easy inclusion of .tif, .png graphics
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+% \usepackage{subfigure}  % allows subfigures in figure
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{xspace}
+\newcommand{\latex}{\LaTeX\xspace}
+
+\usepackage{color}  % http://en.wikibooks.org/wiki/LaTeX/Colors
+
+\long\def\todo#1{{\color{red}{\bf TODO: #1}}}
+
+\long\def\ans#1{{\color{blue}{\em #1}}}
+\long\def\ansnem#1{{\color{blue}#1}}
+\long\def\boldred#1{{\color{red}{\bf #1}}}
+\long\def\boldred#1{\textcolor{red}{\bf #1}}
+\long\def\boldblue#1{\textcolor{blue}{\bf #1}}
+
+% Useful package for syntax highlighting of specific code (such as python) -- see below
+\usepackage{listings}  % http://en.wikibooks.org/wiki/LaTeX/Packages/Listings
+\usepackage{textcomp}
+
+%%% The following lines set up using the listings package
+\renewcommand{\lstlistlistingname}{Code Listings}
+\renewcommand{\lstlistingname}{Code Listing}
+
+%%% Specific for python listings
+\definecolor{gray}{gray}{0.5}
+\definecolor{green}{rgb}{0,0.5,0}
+
+\lstnewenvironment{python}[1][]{
+\lstset{
+language=python,
+basicstyle=\footnotesize,  % could also use this -- a little larger \ttfamily\small\setstretch{1},
+stringstyle=\color{red},
+showstringspaces=false,
+alsoletter={1234567890},
+otherkeywords={\ , \}, \{},
+keywordstyle=\color{blue},
+emph={access,and,break,class,continue,def,del,elif ,else,%
+except,exec,finally,for,from,global,if,import,in,i s,%
+lambda,not,or,pass,print,raise,return,try,while},
+emphstyle=\color{black}\bfseries,
+emph={[2]True, False, None, self},
+emphstyle=[2]\color{green},
+emph={[3]from, import, as},
+emphstyle=[3]\color{blue},
+upquote=true,
+morecomment=[s]{"""}{"""},
+commentstyle=\color{gray}\slshape,
+emph={[4]1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
+emphstyle=[4]\color{blue},
+literate=*{:}{{\textcolor{blue}:}}{1}%
+{=}{{\textcolor{blue}=}}{1}%
+{-}{{\textcolor{blue}-}}{1}%
+{+}{{\textcolor{blue}+}}{1}%
+{*}{{\textcolor{blue}*}}{1}%
+{!}{{\textcolor{blue}!}}{1}%
+{(}{{\textcolor{blue}(}}{1}%
+{)}{{\textcolor{blue})}}{1}%
+{[}{{\textcolor{blue}[}}{1}%
+{]}{{\textcolor{blue}]}}{1}%
+{<}{{\textcolor{blue}<}}{1}%
+{>}{{\textcolor{blue}>}}{1},%
+%framexleftmargin=1mm, framextopmargin=1mm, frame=shadowbox, rulesepcolor=\color{blue},#1
+framexleftmargin=1mm, framextopmargin=1mm, frame=single,#1
+}}{}
+%%% End python code listing definitions
+
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\cov}{cov}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%     Begin Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{center}
+    {\Large {\bf ISTA 421/521 -- Homework 4}} \\
+    \boldred{Due: Monday, October 18, 8pm} \\
+    15 pts total for Undergrads, 20 pts total for Grads\\
+    
+\end{center}
+
+\begin{flushright}
+STUDENT NAME %% Fill in your name here
+
+Undergraduate / Graduate %% select which you are!
+\end{flushright}
+
+\vspace{1cm}
+{\Large {\bf Instructions}}
+
+This assignment is shorter, in order to have it due before the midterm.
+
+Exercise 2 requires you to fill out the small python script, details provided in the Exercise 2 description. All exercises in this homework requires written derivations, so you will submit a .pdf of your written answers. (You can use \latex or any other system (including handwritten; plots, of course, must be program-generated) as long as the final version is in PDF.)
+
+NOTE: Problem 3 is required for Graduate students only; Undergraduates may complete this problem for extra credit equal to the point value.
+
+As in previous homework, pytest ``unit tests'' are provided to help guide your progress.
+
+You may work with others in the course on the homework. However, if you do, you {\bf must} list he names of everyone you worked with, along with which problems you collaborated. Your final submissions of code and written answers {\bf MUST ALL BE IN YOUR OWN CODE FORMULATION AND WORDS}; you cannot submit copies of the same work -- doing so will be considered cheating.
+
+(FCMA refers to the course text: Rogers and Girolami (2016), {\em A First Course in Machine Learning}, second edition.  For general notes on using \latex to typeset math, see: \\{\tt http://en.wikibooks.org/wiki/LaTeX/Mathematics})
+\vspace{.5cm}
+
+
+
+%%%%%%%%%%%%%%%%
+%%%     Exercises
+%%%%%%%%%%%%%%%%
+
+\newpage
+\begin{itemize}
+
+%%%     Exercise 1
+\item[1.]  [5 points]
+Adapted from {\bf Exercise 3.5} FCMA p.134:
+
+If a random variable $R$ has a beta density
+\begin{eqnarray*}
+p(r) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} r^{\alpha - 1} (1-r)^{\beta - 1},
+\end{eqnarray*}
+derive an expression for the expected value of $r$, $\mathbb{E}_{p(r)}\{r\}$ (We made use of this expectation in Lectures 13 and 14 when describing the expected value of the posterior as we considered different priors combined with the likelihood of the data). You will need the following identity for the gamma function:
+\begin{eqnarray*}
+\Gamma(n+1) = n \Gamma(n).
+\end{eqnarray*}
+Hint: Use the definition of the Beta function:
+\begin{eqnarray*}
+\mathcal{B}(\alpha, \beta) = \int_{r=0}^{r=1} r^{\alpha-1}(1-r)^{\beta - 1} \,\mathrm{d}r = \frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha + \beta)}
+\end{eqnarray*}
+
+{\bf Solution.}
+
+
+%%%     Exercise 2
+\item[2.]  [10 points]
+
+In this Exercise you will complete the implementation for calculating four types of values in the provided python script {\tt code/bayes\_coin\_game.py}. 
+
+The function {\tt run\_scenario} will compute the following four variable values: {\tt r\_prior}, {\tt r\_posterior}, {\tt marginal\_likelihood}, {\tt probability\_of\_winning}. The top-level script will call {\tt run\_scenario} under the conditions of each of the three prior scenarios in FCML and that we discussed in lectures 13 and 14.
+
+You will need to fill out how {\tt run\_scenario} sets these variables by implementing each of the following four functions:
+\begin{enumerate}
+\item The function {\tt calculate\_prior\_density} calculates the prior density of $r$, the probability of the coin being heads as a function of the prior beliefs about the probability of heads ($\alpha$) and tails ($\beta$).
+\item The function {\tt calculate\_posterior\_density} calculates the posterior density of $r$ after taking into account the observations (number of heads, {\tt y\_obs}, out of {\tt n} total coin tosses).
+\item The function {\tt calculate\_marginal\_likelihood} calculates the marginal likelihood of the data under the prior beliefs about the probability of heads and tails.
+\item The function {\tt calculate\_probability\_of\_winning} calculates the probability of winning the coin game given the prior beliefs and the observed data.
+\end{enumerate}
+
+In the case of {\tt calculate\_prior\_density} and {\tt calculate\_posterior\_density}, it is up to you whether you implement these functions as computing single scalar values for the density of a particular value of $r$, or whether you implement them as vectorized functions that simultaneously compute a vector of densities given a vector of $r$ values. In either case, the final values for {\tt r\_prior} and {\tt r\_posterior} in {\tt run\_scenario} must be vectors (1-dimensional numpy arrays) that contain the prior and posterior densities (respectively) for each of the values of $r$ in the variable {\tt r\_values} of {\tt run\_scenario}; these vectors are provided to {\tt plot\_densities} to plot the prior and posterior density distributions. See the comments in the code.
+
+You can test your implementations of {\tt calculate\_prior\_density}, {\tt calculate\_posterior\_density}, {\tt calculate\_marginal\_likelihood} and {\tt calculate\_probability\_of\_winning} as soon as you finish each as long as you assign the corresponding variable 
+({\tt r\_prior}, 
+{\tt r\_posterior}, 
+{\tt marginal\_likelihood}, or \\
+{\tt probability\_of\_winning}) 
+in {\tt run\_scenario} -- you don't need to implement all four at once to start testing (there is an individual unit test that checks each variable individually for each scenario).
+
+For you implementations of {\tt calculate\_marginal\_likelihood} and {\tt calculate\_probability\_of\_winning}, it is recommended that you first perform the computations in {\em log space} (i.e., computing log-probability). This means taking the log of the equation that computes the respective density, and then after computing the value in log space, take the exponential of the result to recover the probability. 
+
+{\tt bayes\_coin\_game.py} imports the following functions and modules:
+\begin{enumerate}
+\item {\tt gamma}: Computes the Gamma function.
+\item {\tt loggamma}: Computes the log version of the Gamma function. This can be used in the computation of the log probability implementation for {\tt calculate\_marginal\_likelihood} and \\ {\tt calculate\_probabiity\_of\_winning}.
+\item {\tt binom}: Computes the binomial coefficient, aka computing the number of {\em combinations} of $N$ choose $k$. (NOTE: You don't need a corresponding ``log'' version of this function for log-probability computations in {\tt calculate\_marginal\_likelihood} or {\tt calculate\_probability\_of\_winning}; instead, simply doing {\tt numpy.log(binom(...))} will be sufficient).
+\item {\tt numpy} module: I'll point out that this provides {\tt numpy.log} and {\tt numpy.exp}. 
+\end{enumerate}
+You should not import any additional functions or modules for your implementation.
+
+Running {\tt bayes\_coin\_game.py} will call the {\tt run\_scenario} for each of the three prior scenarios, and this in turn will generate for each scenario a plot of the prior and posterior densities for $r$. In your written solution, include these three plots; describe what the priors represent, and explain the differences between the priors and posteriors (why do they have the shapes they do). Also explain what makes the posteriors between the three scenarios not the same.
+
+{\bf Solution.}
+
+
+
+%%%     Exercise 3
+\item[3.]  [5 points; \boldred{Required only for Graduates}]
+Adapted from {\bf Exercise 3.12} of FCMA p.135:
+
+When performing a Bayesian analysis of the Olympics data, we assumed that $\sigma^2$ was known.  If instead we assume that $\mathbf{w}$ is known and an Inverse Gamma prior is placed on $\sigma^2$,
+\begin{eqnarray*}
+p(\sigma^2 | \alpha, \beta) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} (\sigma^2)^{-\alpha-1} \exp \left\{-\frac{\beta}{\sigma^2} \right\},
+\end{eqnarray*}
+then the posterior over $\sigma^2$ will also be Inverse Gamma. Derive the parameters for the posterior belief in the variance.  
+%Also, explain why this is a better prior than a Gaussian density.
+
+{\bf Solution.}
+
+
+\end{itemize}
+
+\end{document}
